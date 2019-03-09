@@ -1,0 +1,15 @@
+public abstract class Function {
+    public abstract double evaluate(double x);
+
+    public abstract Function derivative();
+
+    public abstract boolean isConstant();
+    
+    public double integral(double i, double f) {
+	return ((evaluate(f) - evaluate(i)) * (f - i)) + ((f - i) * evaluate(i)); //trapezoidal rule
+    }
+
+    public abstract String toString();
+}
+
+//__________________________________________MOVE GENERAL FUNCTIONS INTO HERE_____________________________

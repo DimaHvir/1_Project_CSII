@@ -1,0 +1,49 @@
+public class Sum extends Function {
+    private Function[] components;
+
+    public Sum(Function... All) {
+	components = All;
+    }
+
+    public double evaluate(double x) {
+	double ans = 0;
+	for (int i = 0; i < components.length; i++) {
+	    ans += components[i].evaluate(x);
+	}
+	return ans;
+    }
+
+    public Function derivative() {
+	Function[] ans = new Function[components.length];
+	for (int i = 0; i < components.length; i++) {
+	    ans[i] =  components[i].derivative();
+	}
+	return new Sum(ans);
+    }
+
+    public boolean isConstant() {
+	for (int i = 0; i < components.length; i++) {
+	    if (! components[i].isConstant()) {
+		return false;
+	    }
+	}
+	return true;
+    }
+
+    public double integral(double i, double f) {
+	double ans = 0;
+	for (int j = 0; i < components.length; j++) {
+	    ans += components[j].integral(i, f);
+	}
+	return ans;
+    }
+
+    public String toString() {
+	String ans = "";
+	for(int i = 0; (i + 1)< components.length; i++) {
+	    ans += components[i] + " + ";
+	}
+	ans += components[components.length - 1];
+	return ans;
+    }
+}
